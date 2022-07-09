@@ -1,37 +1,33 @@
-## Welcome to GitHub Pages
+### Plotly 3D Surface Data Visualization with Contour Lines
+### Static Vehicle magnetic field measurements   
 
-You can use the [editor on GitHub](https://github.com/dbaca8/dbaca8.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+**Background:** Magnetometers can be used to measure changes in local magnetic fields caused by the influx of conductors. In this study, a matrix(15x7) of magnetometer sensor data were collected and analyzed. Seven magnetometers were aligned and placed on the pavement, to represent the x-axis, as the vehicle was driven over in 1ft increments, representing the y-axis.  
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+**Experimental Setup:**
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+-  Seven magnetometer sensors aligned in a one-dimensional x-axis array equally spaced 2ft apart
 
-```markdown
-Syntax highlighted code block
+-  2005 Audi TT Roadster convertible, curb weight 3,384 lbs, footprint dimensions 5'8” Width x 13'3” Length 
 
-# Header 1
-## Header 2
-### Header 3
+- Magnetometer readings (z=microgauss) were taken every 1ft (y-axis array) distance for a total matrix of (15x7) measurements
 
-- Bulleted
-- List
+**Results:**
 
-1. Numbered
-2. List
+- The highest peaks represent the engine and front-axle area occupying the highest concentration of metal conductors.    
+- The driver is sitting at the wheel and his magnetic signature can easily be spotted.
 
-**Bold** and _Italic_ and `Code` text
+library(plotly)
 
-[Link](url) and ![Image](src)
-```
+#import data
+#setwd(~Desktop)
+#getwd()
+file <- "Audi_Bz.csv"
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+data <- read.csv(file, header=FALSE, stringsAsFactors=FALSE)
+#str(data)
 
-### Jekyll Themes
+data <- as.matrix(data, nrow = 15, ncol=13)
+#data
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/dbaca8/dbaca8.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+plot_ly(z = data, type = "surface", colorscale="Picnic", contours = list(z = list(show = TRUE, start = 10, end = 250, size = 10)))

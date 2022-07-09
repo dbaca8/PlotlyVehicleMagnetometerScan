@@ -17,6 +17,9 @@
 - The highest peaks represent the engine and front-axle area occupying the highest concentration of metal conductors.    
 - The driver is sitting at the wheel and his magnetic signature can easily be spotted.
 
+```{r, eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE, fig.height=8, fig.width=10}
+#install.packages("plotly")
+# Install and load the R package mice
 library(plotly)
 
 #import data
@@ -31,3 +34,4 @@ data <- as.matrix(data, nrow = 15, ncol=13)
 #data
 
 plot_ly(z = data, type = "surface", colorscale="Picnic", contours = list(z = list(show = TRUE, start = 10, end = 250, size = 10)))
+```
